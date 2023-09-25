@@ -12,7 +12,7 @@
         android:layout_height="250dp"
         android:background="@color/Welspun"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -115,14 +115,30 @@
 
     <Button
         android:id="@+id/button"
-        android:layout_width="179dp"
-        android:layout_height="54dp"
-        android:text="Button"
+        android:layout_width="242dp"
+        android:layout_height="63dp"
+        android:text="Select Car"
+        app:cornerRadius="8dp"
+        android:backgroundTint="@color/Welspun"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cardView"
-        app:layout_constraintVertical_bias="0.833" />
+        app:layout_constraintVertical_bias="0.88" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="180dp"
+        android:layout_height="73dp"
+        android:gravity="center"
+        android:text="WelspunWay"
+        android:textColor="@color/transparent"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toTopOf="@+id/cardView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/View"
+        app:layout_constraintVertical_bias="0.689" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
