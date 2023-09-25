@@ -114,7 +114,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/btnSelectCar"
         android:layout_width="242dp"
         android:layout_height="63dp"
         android:text="Select Car"
