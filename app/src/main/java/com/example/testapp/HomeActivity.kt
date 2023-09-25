@@ -83,7 +83,7 @@ class HomeActivity : AppCompatActivity() {
         return true
     }
     private fun sendSms() {
-        val phoneNumber = "+916370535302" // Replace with the recipient's phone number
+        val phoneNumber = "+918555097099" // Replace with the recipient's phone number
         val message = "Hello, this is your SMS message!" // Replace with your message
 
         try {
