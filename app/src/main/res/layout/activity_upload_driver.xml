@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".UploadDriverActivity"
+    android:backgroundTint="@color/Welspun">
+    
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginStart="20dp"
+        app:cardCornerRadius="30dp"
+        app:cardElevation="20dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="center_horizontal"
+            android:padding="20dp"
+            android:background="@drawable/welspun_border">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text = "Upload Data"
+                android:textSize="30sp"
+                android:textAlignment="center"/>
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:src="@drawable/ertiga"
+                android:layout_marginTop="10dp"
+                android:id="@+id/uploadImage"
+                android:scaleType="fitXY"
+                android:contentDescription="Car Image" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:id="@+id/etDriverName"
+                android:gravity="start|center_vertical"
+                android:layout_marginTop="10dp"
+                >
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_marginTop="20dp"
+                    android:textColor="@color/Welspun"
+                    android:padding="16dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Driver Name" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center_horizontal"
+
+            >
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/etCarNumber"
+                android:layout_width="168dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="start|center_vertical">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:hint="Car Number"
+                    android:padding="16dp"
+                    android:textColor="@color/Welspun" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/etCapacity"
+                android:layout_width="122dp"
+                android:layout_height="60dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="30dp"
+                android:gravity="start|center_vertical">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="114dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:hint="Capacity"
+                    android:inputType="number"
+                    android:padding="16dp"
+                    android:textColor="@color/Welspun" />
+            </com.google.android.material.textfield.TextInputLayout>
+        </LinearLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:id="@+id/etCarName"
+                android:gravity="start|center_vertical"
+                android:layout_marginTop="10dp"
+                >
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_marginTop="20dp"
+                    android:textColor="@color/Welspun"
+                    android:padding="16dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Car Name" />
+            </com.google.android.material.textfield.TextInputLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center_horizontal"
+
+            >
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/etDriverPlant"
+                android:layout_width="142dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="start|center_vertical">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:hint="Plant"
+                    android:padding="16dp"
+                    android:textColor="@color/Welspun" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/etVacancy"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="10dp"
+                android:gravity="start|center_vertical">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:hint="Available"
+                    android:padding="16dp"
+                    android:textColor="@color/Welspun" />
+            </com.google.android.material.textfield.TextInputLayout>
+        </LinearLayout>
+<!--  ###############################################################################################                                        -->
+            <Button
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+                android:text="Save"
+            android:id="@+id/btnSaveDriverDetails"
+                android:backgroundTint="@color/Welspun"
+            android:layout_marginTop="20dp"/>
+
+
+        </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+
+
+</ScrollView>
