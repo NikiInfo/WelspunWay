@@ -14,7 +14,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:fadingEdge="horizontal"/>
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
@@ -89,25 +90,30 @@
 
     <Button
         android:id="@+id/btnSignOut"
-        android:layout_width="102dp"
-        android:layout_height="60dp"
+        style="@style/Widget.MaterialComponents.Button.Icon"
+        android:layout_width="44dp"
+        android:layout_height="47dp"
         android:layout_marginTop="4dp"
         android:layout_marginEnd="4dp"
         android:backgroundTint="#1f2252"
-        android:text="Signout"
+        android:text=""
         android:textColor="#ffffff"
+        app:icon="@drawable/baseline_exit_to_app_24"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/btnProfile"
-        android:layout_width="102dp"
-        android:layout_height="60dp"
+        style="@style/Widget.MaterialComponents.Button.Icon"
+        android:layout_width="60dp"
+        android:layout_height="61dp"
         android:layout_marginTop="4dp"
         android:layout_marginEnd="144dp"
         android:backgroundTint="#1f2252"
-        android:text="Profile"
+        android:drawableStart="@drawable/baseline_person_24"
+        android:text=""
         android:textColor="#ffffff"
+        app:icon="@drawable/baseline_person_24"
         app:layout_constraintEnd_toStartOf="@+id/btnSignOut"
         app:layout_constraintHorizontal_bias="0.05"
         app:layout_constraintStart_toStartOf="parent"
@@ -118,7 +124,8 @@
         android:layout_width="242dp"
         android:layout_height="63dp"
         android:text="Select Car"
-        app:cornerRadius="8dp"
+        app:cornerRadius="30dp"
+
         android:backgroundTint="@color/Welspun"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
