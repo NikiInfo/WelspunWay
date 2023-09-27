@@ -38,32 +38,38 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/textInputLayoutEmail"
-                style="@style/Widget.Material3.TextInputLayout.OutlinedBox.Dense"
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                 android:layout_width="match_parent"
                 android:layout_height="75dp"
                 app:startIconDrawable="@drawable/baseline_add_location_24">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/FromField"
-                    style="@style/Widget.Material3.TextInputLayout.OutlinedBox.Dense"
+                <AutoCompleteTextView
+                    android:id="@+id/etFrom"
                     android:layout_width="match_parent"
-                    android:layout_height="75dp"
+                    android:layout_height="wrap_content"
                     android:background="@color/transparent"
-                    android:hint="From" />
+                    android:layout_weight="1"
+                    android:text="From"
+                    android:inputType="none"/>
+
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/To"
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                 android:layout_width="match_parent"
                 android:layout_height="75dp"
                 app:startIconDrawable="@drawable/baseline_add_location_24">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/Tofield"
-                    android:layout_width="match_parent"
-                    android:layout_height="75dp"
+                <AutoCompleteTextView
+                    android:id="@+id/etTo"
                     android:background="@color/transparent"
-                    android:hint="To" />
+                    android:layout_width="match_parent"
+                    android:layout_height="64dp"
+                    android:layout_weight="1"
+                    android:text="To"
+                    android:inputType="none"/>
+
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout

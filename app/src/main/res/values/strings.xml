@@ -6,7 +6,17 @@
     <string name="second_fragment_label">Second Fragment</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
-
+    <string-array name="Plants">
+        <item>RMHS</item>
+        <item>CokeOven</item>
+        <item>BF Operations Office</item>
+        <item>Sinter</item>
+        <item>Admin</item>
+        <item>quality(Main) office</item>
+        <item>Finishing Line</item>
+        <item>Admin(WCL-SD)</item>
+        <item>WCL</item>
+    </string-array>
     <string name="lorem_ipsum">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in scelerisque sem. Mauris
         volutpat, dolor id interdum ullamcorper, risus dolor egestas lectus, sit amet mattis purus
