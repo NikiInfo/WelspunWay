@@ -61,12 +61,18 @@ class UserDetails : AppCompatActivity() {
         databaseReference.child(uid).addValueEventListener(object : ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
 
-                employee = snapshot.getValue(Employee::class.java)!!
-                binding.tvEmpName.text = employee.name
-                binding.tvEmpId.text = "${employee.empId}"
-                binding.tvEmpDesignation.text = employee.designation
-                binding.tvEmpPlant.text = employee.plant
-                dialog.dismiss()
+                 val employee = snapshot.getValue(Employee::class.java)
+                if(employee!=null ) {
+                    binding.tvEmpName.text = employee.name
+                    binding.tvEmpId.text = "${employee.empId}"
+                    binding.tvEmpDesignation.text = employee.designation
+                    binding.tvEmpPlant.text = employee.plant
+                    dialog.dismiss()
+                } else {
+                    val intent = Intent(this@UserDetails,AddUserDetails::class.java)
+                    startActivity(intent)
+                    Toast.makeText(this@UserDetails,"Please Udpate user details first",Toast.LENGTH_SHORT).show()
+                }
 
 
             }

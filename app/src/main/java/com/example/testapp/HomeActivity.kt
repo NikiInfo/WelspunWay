@@ -80,8 +80,7 @@ class HomeActivity : AppCompatActivity() {
 //                sendSms()
 //            }
             saveData()
-            val intent = Intent(this,CarSelectActivity::class.java)
-            startActivity(intent)
+
         }
 
 
@@ -127,12 +126,22 @@ class HomeActivity : AppCompatActivity() {
                         null,
                         bookingId
                     )
+                    if(empName==null && plant==null){
+                        Toast.makeText(this@HomeActivity, "Please update Your Details Under Profile", Toast.LENGTH_SHORT).show()
 
-                    // Save the Booking object to Firebase
-                    databaseReference.child(bookingId).setValue(booking)
-                        .addOnCompleteListener {
-                            Toast.makeText(this@HomeActivity, "Driver details saved successfully", Toast.LENGTH_SHORT).show()
-                        }
+                    } else {
+                        // Save the Booking object to Firebase
+                        databaseReference.child(bookingId).setValue(booking)
+                            .addOnCompleteListener {
+                                Toast.makeText(
+                                    this@HomeActivity,
+                                    "Details saved successfully",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                                val intent = Intent(this@HomeActivity,CarSelectActivity::class.java)
+                                startActivity(intent)
+                            }
+                    }
                 } else {
                     Toast.makeText(this@HomeActivity, "User data not found", Toast.LENGTH_SHORT).show()
                 }
