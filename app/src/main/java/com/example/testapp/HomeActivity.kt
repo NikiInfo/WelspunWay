@@ -138,7 +138,15 @@ class HomeActivity : AppCompatActivity() {
                                     "Details saved successfully",
                                     Toast.LENGTH_SHORT
                                 ).show()
-                                val intent = Intent(this@HomeActivity,CarSelectActivity::class.java)
+                                val intent = Intent(this@HomeActivity,CarSelectActivity::class.java).apply {
+                                    putExtra("bookingId",bookingId)
+                                    putExtra("to",to)
+                                    putExtra("From",from)
+                                    putExtra("empId",empId)
+                                    putExtra("purpose",purpose)
+                                    putExtra("plant",plant)
+                                    putExtra("empName",empName)
+                                }
                                 startActivity(intent)
                             }
                     }
