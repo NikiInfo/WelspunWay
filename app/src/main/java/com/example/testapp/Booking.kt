@@ -3,9 +3,9 @@ data class Booking(
 
                     var driverId: String?="",
                   var driverName : String?="",
-                   var to: String,
-                   var from: String,
-                   var empId: String,
+                   var to: String?="",
+                   var from: String?="",
+                   var empId: String?="",
                    var purpose:String? = "",
                   var carNumber : String? = "",
                   var plant : String ? = "" ,

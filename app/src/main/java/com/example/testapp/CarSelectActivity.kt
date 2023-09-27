@@ -26,6 +26,7 @@ class CarSelectActivity : AppCompatActivity() {
 
         recyclerView = findViewById(R.id.recycleView)
         val employeePlant = intent.getStringExtra("plant")
+
         val gridLayoutManager = GridLayoutManager(this,1)
         recyclerView.layoutManager = gridLayoutManager
 
@@ -62,6 +63,7 @@ class CarSelectActivity : AppCompatActivity() {
                 dialog.dismiss()
                 val intent = Intent(this@CarSelectActivity,HomeActivity::class.java)
                 startActivity(intent)
+
             }
 
         })

@@ -1,5 +1,6 @@
 package com.example.testapp
 
+import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -99,7 +100,7 @@ class HomeActivity : AppCompatActivity() {
         val from = binding.etFrom.text.toString()
         val to = binding.etTo.text.toString()
         val purpose = binding.tvpurpose.text.toString()
-        val bookingId = databaseReference.push().key ?: ""
+
         val databaseReference2 = FirebaseDatabase.getInstance().getReference("Employees")
         // Retrieve user details and then save booking
         databaseReference2.child(uid).addListenerForSingleValueEvent(object : ValueEventListener {
@@ -107,48 +108,29 @@ class HomeActivity : AppCompatActivity() {
 
                 val empName = snapshot.child("name").getValue(String::class.java)
                 val plant = snapshot.child("plant").getValue(String::class.java)
+                val sharedPreferences = getSharedPreferences("MyPreferences",Context.MODE_PRIVATE)
+                val editor = sharedPreferences.edit()
+                editor.putString("empName",empName)
+                editor.putString("empId",empId)
+                editor.putString("from",from)
+                editor.putString("to",to)
+                editor.putString("purpose",purpose)
+
 
                 if (uid != null) {
 
 
-                     //Create a Booking object with user details
-                    val booking = Booking(
-                        null,
-                        null,
-                        to,
-                        from,
-                        empId,
-                        purpose,
-                        null,
-                        plant,
-                        empName,
-                        null,
-                        null,
-                        bookingId
-                    )
+
+
                     if(empName==null && plant==null){
                         Toast.makeText(this@HomeActivity, "Please update Your Details Under Profile", Toast.LENGTH_SHORT).show()
 
                     } else {
-                        // Save the Booking object to Firebase
-                        databaseReference.child(bookingId).setValue(booking)
-                            .addOnCompleteListener {
-                                Toast.makeText(
-                                    this@HomeActivity,
-                                    "Details saved successfully",
-                                    Toast.LENGTH_SHORT
-                                ).show()
-                                val intent = Intent(this@HomeActivity,CarSelectActivity::class.java).apply {
-                                    putExtra("bookingId",bookingId)
-                                    putExtra("to",to)
-                                    putExtra("From",from)
-                                    putExtra("empId",empId)
-                                    putExtra("purpose",purpose)
-                                    putExtra("plant",plant)
-                                    putExtra("empName",empName)
-                                }
-                                startActivity(intent)
-                            }
+                        val intent = Intent(this@HomeActivity,CarSelectActivity::class.java).apply {
+                        putExtra("plant",plant)
+
+                        }
+                        startActivity(intent)
                     }
                 } else {
                     Toast.makeText(this@HomeActivity, "User data not found", Toast.LENGTH_SHORT).show()
