@@ -23,6 +23,12 @@
         android:theme="@style/Theme.TestApp"
         tools:targetApi="33">
         <activity
+            android:name=".booking_confirmed"
+            android:exported="false" />
+        <activity
+            android:name=".RecyclerDetail2"
+            android:exported="false" />
+        <activity
             android:name=".CarSelectActivity"
             android:exported="false" />
         <activity

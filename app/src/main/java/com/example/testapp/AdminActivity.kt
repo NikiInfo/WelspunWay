@@ -30,7 +30,6 @@ class AdminActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_admin)
-
         recyclerView = findViewById(R.id.recycleView)
         fab = findViewById(R.id.btnAddCarDetails)
         searchView = findViewById(R.id.adminSearch)
