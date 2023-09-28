@@ -10,6 +10,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.database.DatabaseReference
@@ -32,8 +33,10 @@ class RecyclerDetail2 : AppCompatActivity() {
     private lateinit var databaseReference: DatabaseReference
 
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         databaseReference = FirebaseDatabase.getInstance().getReference("Booking")
+
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_recycler_detail2)
@@ -42,6 +45,9 @@ class RecyclerDetail2 : AppCompatActivity() {
         image = findViewById(R.id.detailImage)
         carName = findViewById(R.id.detailCarName)
         name = findViewById(R.id.detailTitle)
+        val bookingId = databaseReference.push().key ?: ""
+        val driverName = intent.getStringExtra("Driver Name")
+        val carNumber = intent.getStringExtra("Car Number")
 
         val bundle = intent.extras
         if(bundle != null){
@@ -68,9 +74,14 @@ class RecyclerDetail2 : AppCompatActivity() {
                                 "Booking has been confirmed succesfully",
                                 Toast.LENGTH_LONG
                             ).show()
+
                         }
                 }
-                val intent = Intent(this, booking_confirmed::class.java)
+                val intent = Intent(this, booking_confirmed::class.java).apply {
+                    putExtra("Driver Name",driverName)
+                    putExtra("Car Number",carNumber)
+                    putExtra("BookingId",bookingId)
+                }
                 startActivity(intent)
             } else  {
                 Toast.makeText(

@@ -23,7 +23,7 @@ class UserDetails : AppCompatActivity() {
     private lateinit var employee: Employee
     private lateinit var uid: String
     override fun onCreate(savedInstanceState: Bundle?) {
-        val button = findViewById<Button>(R.id.btnAddUserDetails)
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_details)
         binding = ActivityUserDetailsBinding.inflate(layoutInflater)

@@ -61,17 +61,7 @@ class SelectCarAdapter(private val context: Context, private var driverlist: Arr
         driverlist = searchList
         notifyDataSetChanged()
     }
-    fun filterDataList(plantName: String) {
-        val filteredList = ArrayList<Driver>()
 
-        for (driver in driverlist) {
-            if (driver.plant == plantName) {
-                filteredList.add(driver)
-            }
-        }
-
-        searchDataList(filteredList)
-    }
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val recImage: ImageView = itemView.findViewById(R.id.recImage)
         val recCard: CardView = itemView.findViewById(R.id.recCard)

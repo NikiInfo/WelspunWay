@@ -116,10 +116,6 @@ class HomeActivity : AppCompatActivity() {
 
 
                 if (uid != null) {
-
-
-
-
                     if(empName==null && plant==null){
                         Toast.makeText(this@HomeActivity, "Please update Your Details Under Profile", Toast.LENGTH_SHORT).show()
 

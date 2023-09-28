@@ -49,9 +49,12 @@ class CarSelectActivity : AppCompatActivity() {
                 for(itemSnapshot in snapshot.children){
                     val driver = itemSnapshot.getValue(Driver::class.java)
                     driver?.let { (driverList as ArrayList<Driver>).add(it) }
-                }
-                if (employeePlant != null) {
-                    adapter.filterDataList(employeePlant, "yes")
+                    if (employeePlant != null) {
+                        adapter.filterDataList(employeePlant, "yes")
+                        adapter.notifyDataSetChanged()
+                        dialog.dismiss()
+                    }
+
                 }
 
                 dialog.dismiss()
