@@ -9,12 +9,15 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
+import java.text.SimpleDateFormat
+import java.util.Date
 
 class RecyclerDetail2 : AppCompatActivity() {
     val driverList = ArrayList<Driver>()
@@ -52,17 +55,30 @@ class RecyclerDetail2 : AppCompatActivity() {
 
         }
         btnConfirmBooking.setOnClickListener {
-           val selectedDriverId = intent.getStringExtra("Driver Id")
-            saveBookingData()
-            val databaseReference2 = FirebaseDatabase.getInstance().getReference("Driver")
-            if (selectedDriverId != null) {
-                databaseReference2.child(selectedDriverId).child("availability").setValue("no")
-                    .addOnSuccessListener {
-                        Toast.makeText(this,"Booking has been confirmed succesfully",Toast.LENGTH_LONG).show()
-                    }
+            val selectedDriverId = intent.getStringExtra("Driver Id")
+            val vacancy = intent.getStringExtra("Availability")
+            if (vacancy == "yes") {
+                saveBookingData()
+                val databaseReference2 = FirebaseDatabase.getInstance().getReference("Driver")
+                if (selectedDriverId != null) {
+                    databaseReference2.child(selectedDriverId).child("availability").setValue("no")
+                        .addOnSuccessListener {
+                            Toast.makeText(
+                                this,
+                                "Booking has been confirmed succesfully",
+                                Toast.LENGTH_LONG
+                            ).show()
+                        }
+                }
+                val intent = Intent(this, booking_confirmed::class.java)
+                startActivity(intent)
+            } else  {
+                Toast.makeText(
+                    this,
+                    "Sorry! This has been booked by someone else",
+                    Toast.LENGTH_LONG
+                ).show()
             }
-            val intent = Intent(this,booking_confirmed::class.java)
-            startActivity(intent)
         }
 
 
@@ -70,37 +86,36 @@ class RecyclerDetail2 : AppCompatActivity() {
 
     private fun saveBookingData() {
         val driverName = intent.getStringExtra("Driver Name")
-        val  sharedPreferences = getSharedPreferences("MyPreferences",Context.MODE_PRIVATE)
-        val to = sharedPreferences.getString("to","")
-        val from = sharedPreferences.getString("from","")
-        val empId = sharedPreferences.getString("empId","")
-        val purpose = sharedPreferences.getString("purpose","")
+       val dataHolder = DataHolder.getInstance()
+        val to = dataHolder.toDestination
+        val from = dataHolder.fromDestination
+        val purpose = dataHolder.purpose
+
         val carNumber = intent.getStringExtra("Car Number")
-        val plant = sharedPreferences.getString("plant","")
-        val empName = sharedPreferences.getString("empName","")
-        val timeStamp = System.currentTimeMillis().toString()
+        val date  = Date()
+        val formatter = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+        val timeStamp = formatter.format(date)
+
         val selectedDriverId = intent.getStringExtra("Driver Id")
         val bookingId = databaseReference.push().key ?: ""
-        val booking = to?.let {
-            if (from != null) {
-                if (empId != null) {
+        val booking =
                     Booking(
                         selectedDriverId,
                         driverName,
                         to,
                         from,
-                        empId,
+                        null,
                         purpose,
                         carNumber,
-                        plant,
-                        empName,
+                        null,
+                        null,
                         timeStamp,
                         null,
                         bookingId
                         )
-                }
-            }
-        }
+
+
+
         if (bookingId != null) {
             databaseReference.child(bookingId).setValue(booking)
                 .addOnCompleteListener {

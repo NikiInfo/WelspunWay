@@ -17,6 +17,7 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.ViewModelProvider
 import com.example.testapp.databinding.ActivityHomeBinding
 import com.example.testapp.databinding.ActivitySignInBinding
 import com.google.firebase.auth.FirebaseAuth
@@ -108,13 +109,10 @@ class HomeActivity : AppCompatActivity() {
 
                 val empName = snapshot.child("name").getValue(String::class.java)
                 val plant = snapshot.child("plant").getValue(String::class.java)
-                val sharedPreferences = getSharedPreferences("MyPreferences",Context.MODE_PRIVATE)
-                val editor = sharedPreferences.edit()
-                editor.putString("empName",empName)
-                editor.putString("empId",empId)
-                editor.putString("from",from)
-                editor.putString("to",to)
-                editor.putString("purpose",purpose)
+                val dataHolder = DataHolder.getInstance()
+                dataHolder.toDestination = to
+                dataHolder.fromDestination = from
+                dataHolder.purpose = purpose
 
 
                 if (uid != null) {
