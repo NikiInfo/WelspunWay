@@ -25,7 +25,7 @@ class CarSelectActivity : AppCompatActivity() {
         setContentView(R.layout.activity_car_select)
 
         recyclerView = findViewById(R.id.recycleView)
-        val employeePlant = intent.getStringExtra("plant")
+
 
         val gridLayoutManager = GridLayoutManager(this,1)
         recyclerView.layoutManager = gridLayoutManager
@@ -47,16 +47,18 @@ class CarSelectActivity : AppCompatActivity() {
             override fun onDataChange(snapshot: DataSnapshot) {
                 driverList.clear()
                 for(itemSnapshot in snapshot.children){
+
                     val driver = itemSnapshot.getValue(Driver::class.java)
                     driver?.let { (driverList as ArrayList<Driver>).add(it) }
-                    if (employeePlant != null) {
-                        adapter.filterDataList(employeePlant, "yes")
-                        adapter.notifyDataSetChanged()
-                        dialog.dismiss()
-                    }
+
 
                 }
-
+                val employeePlant = intent.getStringExtra("plant")
+                if (employeePlant != null) {
+                    adapter.filterDataList(employeePlant, "yes")
+                    adapter.notifyDataSetChanged()
+                    dialog.dismiss()
+                }
                 dialog.dismiss()
 
             }

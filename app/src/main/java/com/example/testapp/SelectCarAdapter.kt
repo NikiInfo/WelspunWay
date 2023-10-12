@@ -80,7 +80,7 @@ class SelectCarAdapter(private val context: Context, private var driverlist: Arr
         }
 
         searchDataList(filteredList)
-        notifyDataSetChanged()
+
     }
 
 }

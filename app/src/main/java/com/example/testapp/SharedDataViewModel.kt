@@ -8,6 +8,8 @@ class DataHolder private constructor() {
     var toDestination: String? = null
     var fromDestination: String? = null
     var purpose: String? = null
+    var empId: String? = null
+    var empName: String?= null
 
     companion object {
         // Singleton instance

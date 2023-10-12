@@ -2,13 +2,18 @@ package com.example.testapp
 
 import android.app.AlertDialog
 import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
+import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.telephony.SmsManager
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -31,6 +36,7 @@ class RecyclerDetail2 : AppCompatActivity() {
     private var key = ""
     private lateinit var btnConfirmBooking: Button
     private lateinit var databaseReference: DatabaseReference
+    private val REQUEST_SMS_PERMISSION = 123
 
 
 
@@ -90,6 +96,11 @@ class RecyclerDetail2 : AppCompatActivity() {
                     Toast.LENGTH_LONG
                 ).show()
             }
+                        if (checkSmsPermission()) {
+                // Permission is granted, send the SMS
+                sendSms()
+            }
+
         }
 
 
@@ -101,6 +112,8 @@ class RecyclerDetail2 : AppCompatActivity() {
         val to = dataHolder.toDestination
         val from = dataHolder.fromDestination
         val purpose = dataHolder.purpose
+        val empId = dataHolder.empId
+        val empName = dataHolder.empName
 
         val carNumber = intent.getStringExtra("Car Number")
         val date  = Date()
@@ -115,11 +128,11 @@ class RecyclerDetail2 : AppCompatActivity() {
                         driverName,
                         to,
                         from,
-                        null,
+                        empId,
                         purpose,
                         carNumber,
                         null,
-                        null,
+                        empName,
                         timeStamp,
                         null,
                         bookingId
@@ -139,6 +152,60 @@ class RecyclerDetail2 : AppCompatActivity() {
                 }
         }
 
+    }
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == REQUEST_SMS_PERMISSION) {
+            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                // Permission granted, send the SMS
+                sendSms()
+            } else {
+                // Permission denied, show an explanation or handle it accordingly
+                showPermissionExplanation()
+            }
+        }
+    }
+    private fun checkSmsPermission(): Boolean {
+        val sendSmsPermission =android.Manifest.permission.SEND_SMS
+        if (ContextCompat.checkSelfPermission(this, sendSmsPermission) != PackageManager.PERMISSION_GRANTED) {
+            // Permission is not granted, request it
+            ActivityCompat.requestPermissions(this, arrayOf(sendSmsPermission), REQUEST_SMS_PERMISSION)
+            return false
+        }
+        return true
+    }
+    private fun sendSms() {
+        val dataHolder = DataHolder.getInstance()
+        val empName = dataHolder.empName
+        val to = dataHolder.toDestination
+        val from = dataHolder.fromDestination
+        val phoneNumber = "+919979796053" // Replace with the recipient's phone number
+        val message = "Your Ride has Started with $empName Location from $from to $to" // Replace with your message
+
+        try {
+            val smsManager = SmsManager.getDefault()
+            smsManager.sendTextMessage(phoneNumber, null, message, null, null)
+            Toast.makeText(this, "SMS sent!", Toast.LENGTH_SHORT).show()
+        } catch (e: Exception) {
+            Toast.makeText(this, "SMS failed to send.", Toast.LENGTH_SHORT).show()
+            e.printStackTrace()
+        }
+    }
+    private fun showPermissionExplanation() {
+        androidx.appcompat.app.AlertDialog.Builder(this)
+            .setMessage("SMS permission is required to send messages.")
+            .setPositiveButton("OK") { dialog: DialogInterface?, _: Int ->
+                ActivityCompat.requestPermissions(
+                    this,
+                    arrayOf(android.Manifest.permission.SEND_SMS),
+                    REQUEST_SMS_PERMISSION
+                )
+                dialog?.dismiss()
+            }
+            .setNegativeButton("Cancel") { dialog: DialogInterface?, _: Int ->
+                dialog?.dismiss()
+            }
+            .show()
     }
 
 

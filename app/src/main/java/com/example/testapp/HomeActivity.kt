@@ -33,7 +33,6 @@ import com.google.firebase.ktx.Firebase
 class HomeActivity : AppCompatActivity() {
     private lateinit var empList: ArrayList<Employee>
     private lateinit var databaseReference: DatabaseReference
-    private val REQUEST_SMS_PERMISSION = 123
     private lateinit var auth: FirebaseAuth
     private lateinit var binding: ActivityHomeBinding
     private lateinit var employee: Employee
@@ -113,6 +112,8 @@ class HomeActivity : AppCompatActivity() {
                 dataHolder.toDestination = to
                 dataHolder.fromDestination = from
                 dataHolder.purpose = purpose
+                dataHolder.empId = empId
+                dataHolder.empName = empName
 
 
                 if (uid != null) {
@@ -136,57 +137,4 @@ class HomeActivity : AppCompatActivity() {
             }
         })
     }
-
-
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if (requestCode == REQUEST_SMS_PERMISSION) {
-            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                // Permission granted, send the SMS
-                sendSms()
-            } else {
-                // Permission denied, show an explanation or handle it accordingly
-                showPermissionExplanation()
-            }
-        }
-    }
-    private fun checkSmsPermission(): Boolean {
-        val sendSmsPermission =android.Manifest.permission.SEND_SMS
-        if (ContextCompat.checkSelfPermission(this, sendSmsPermission) != PackageManager.PERMISSION_GRANTED) {
-            // Permission is not granted, request it
-            ActivityCompat.requestPermissions(this, arrayOf(sendSmsPermission), REQUEST_SMS_PERMISSION)
-            return false
-        }
-        return true
-    }
-    private fun sendSms() {
-        val phoneNumber = "+918555097099" // Replace with the recipient's phone number
-        val message = "Hello, this is your SMS message!" // Replace with your message
-
-        try {
-            val smsManager = SmsManager.getDefault()
-            smsManager.sendTextMessage(phoneNumber, null, message, null, null)
-            Toast.makeText(this, "SMS sent!", Toast.LENGTH_SHORT).show()
-        } catch (e: Exception) {
-            Toast.makeText(this, "SMS failed to send.", Toast.LENGTH_SHORT).show()
-            e.printStackTrace()
-        }
-    }
-    private fun showPermissionExplanation() {
-        AlertDialog.Builder(this)
-            .setMessage("SMS permission is required to send messages.")
-            .setPositiveButton("OK") { dialog: DialogInterface?, _: Int ->
-                ActivityCompat.requestPermissions(
-                    this,
-                    arrayOf(android.Manifest.permission.SEND_SMS),
-                    REQUEST_SMS_PERMISSION
-                )
-                dialog?.dismiss()
-            }
-            .setNegativeButton("Cancel") { dialog: DialogInterface?, _: Int ->
-                dialog?.dismiss()
-            }
-            .show()
-    }
-
-    }
+}
