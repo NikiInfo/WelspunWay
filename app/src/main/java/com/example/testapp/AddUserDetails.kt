@@ -21,7 +21,6 @@ class AddUserDetails : AppCompatActivity() {
     private lateinit var databaseReference: DatabaseReference
     private lateinit var dialog : Dialog
     override fun onCreate(savedInstanceState: Bundle?) {
-        val mButton = findViewById<Button>(R.id.btnAddUser)
         super.onCreate(savedInstanceState)
         binding = ActivityAddUserDetailsBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -33,11 +32,6 @@ class AddUserDetails : AppCompatActivity() {
         databaseReference = FirebaseDatabase.getInstance().getReference("Employees")
         binding.btnAddUser.setOnClickListener {
             showProgressBar()
-//            val name = binding.etName.toString()
-//            val empIdText = binding.textInputLayoutEmployeeID.editText?.text.toString()
-//            val empId: Int = empIdText.toInt()
-//            val plant = binding.etPlant.toString()
-//            val designation = binding.etDesignation.toString()
             val name = binding.textInputLayoutName.editText?.text.toString()
             val empIdText = binding.textInputLayoutEmployeeID.editText?.text.toString()
             val empId: Int = empIdText.toInt()
@@ -50,10 +44,9 @@ class AddUserDetails : AppCompatActivity() {
             if (uid != null){
                 databaseReference.child(uid).setValue(employee).addOnCompleteListener {
                     if(it.isSuccessful){
-//                        mButton.visibility = View.INVISIBLE
                         Toast.makeText(this@AddUserDetails,"Successfully updated profile",Toast.LENGTH_SHORT).show()
                         hideProgressBar()
-                        val intent = Intent(this,UserDetails::class.java)
+                        val intent = Intent(this,MainActivity::class.java)
                         startActivity(intent)
 
                     } else {

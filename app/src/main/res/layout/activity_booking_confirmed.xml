@@ -56,5 +56,21 @@
         app:layout_constraintTop_toBottomOf="@+id/textView3"
         app:srcCompat="@android:drawable/stat_sys_phone_call" />
 
+    <Button
+        android:id="@+id/btnEndRide"
+        android:layout_width="242dp"
+        android:layout_height="63dp"
+        android:layout_marginBottom="380dp"
+        android:backgroundTint="@color/Welspun"
+
+        android:text="Click to exit Ride"
+        app:cornerRadius="30dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView7"
+        app:layout_constraintVertical_bias="1.0" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

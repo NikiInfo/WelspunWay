@@ -44,12 +44,7 @@ class UserDetails : AppCompatActivity() {
 
         }
 
-//        binding.btnAddUserDetails.setOnClickListener {
-//            val intent = Intent(this,AddUserDetails::class.java)
-//            startActivity(intent)
-//            //button.isEnabled = false
-////            button.visibility = View.GONE
-//        }
+
     }
 
     private fun getUserData() {

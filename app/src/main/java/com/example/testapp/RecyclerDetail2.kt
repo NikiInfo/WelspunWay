@@ -26,8 +26,6 @@ import java.text.SimpleDateFormat
 import java.util.Date
 
 class RecyclerDetail2 : AppCompatActivity() {
-    val driverList = ArrayList<Driver>()
-    //private val driverList: ArrayList<Driver>()
     private lateinit var carName: TextView
     private lateinit var name: TextView
     private lateinit var tvcarNumber: TextView
@@ -37,6 +35,7 @@ class RecyclerDetail2 : AppCompatActivity() {
     private lateinit var btnConfirmBooking: Button
     private lateinit var databaseReference: DatabaseReference
     private val REQUEST_SMS_PERMISSION = 123
+
 
 
 
@@ -87,6 +86,7 @@ class RecyclerDetail2 : AppCompatActivity() {
                     putExtra("Driver Name",driverName)
                     putExtra("Car Number",carNumber)
                     putExtra("BookingId",bookingId)
+                    putExtra("DriverId",selectedDriverId)
                 }
                 startActivity(intent)
             } else  {
@@ -166,7 +166,7 @@ class RecyclerDetail2 : AppCompatActivity() {
         }
     }
     private fun checkSmsPermission(): Boolean {
-        val sendSmsPermission =android.Manifest.permission.SEND_SMS
+        val sendSmsPermission = android.Manifest.permission.SEND_SMS
         if (ContextCompat.checkSelfPermission(this, sendSmsPermission) != PackageManager.PERMISSION_GRANTED) {
             // Permission is not granted, request it
             ActivityCompat.requestPermissions(this, arrayOf(sendSmsPermission), REQUEST_SMS_PERMISSION)
@@ -179,7 +179,7 @@ class RecyclerDetail2 : AppCompatActivity() {
         val empName = dataHolder.empName
         val to = dataHolder.toDestination
         val from = dataHolder.fromDestination
-        val phoneNumber = "+919979796053" // Replace with the recipient's phone number
+        val phoneNumber = "+918688451734" // Replace with the recipient's phone number
         val message = "Your Ride has Started with $empName Location from $from to $to" // Replace with your message
 
         try {

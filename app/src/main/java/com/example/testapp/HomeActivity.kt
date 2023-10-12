@@ -37,8 +37,7 @@ class HomeActivity : AppCompatActivity() {
     private lateinit var binding: ActivityHomeBinding
     private lateinit var employee: Employee
     private lateinit var uid: String
-    //private lateinit var empName: String
-//    private lateinit var plant: String
+
 
 
     override fun onResume() {
@@ -76,10 +75,7 @@ class HomeActivity : AppCompatActivity() {
 
         databaseReference = FirebaseDatabase.getInstance().getReference("Booking")
         binding.btnSelectCar.setOnClickListener {
-//            if (checkSmsPermission()) {
-//                // Permission is granted, send the SMS
-//                sendSms()
-//            }
+
             saveData()
 
         }

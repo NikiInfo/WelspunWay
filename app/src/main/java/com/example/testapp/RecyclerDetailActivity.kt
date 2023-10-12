@@ -2,6 +2,7 @@ package com.example.testapp
 
 import android.app.AlertDialog
 import android.content.Intent
+import android.media.Image
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
@@ -89,11 +90,15 @@ class RecyclerDetailActivity : AppCompatActivity() {
         driverId: String,
         driverName: String
     ){
+        val bundle = intent.extras
         val mDialog = AlertDialog.Builder(this)
         val inflater = layoutInflater
         val mDialogView = inflater.inflate(R.layout.activity_update_driver_details,null)
          mDialog.setView(mDialogView)
-
+        if (bundle != null) {
+            imageUrl = bundle.getString("Image")?: ""
+        }
+        val image = findViewById<ImageView>(R.id.updateImage)
         val etDriverName = mDialogView.findViewById<TextInputEditText>(R.id.etDriverName)
         val etCarNumber = mDialogView.findViewById<TextInputEditText>(R.id.etCarNumber)
         val etCapacity = mDialogView.findViewById<TextInputEditText>(R.id.etCapacity)
@@ -101,7 +106,7 @@ class RecyclerDetailActivity : AppCompatActivity() {
         val etPlant = mDialogView.findViewById<TextInputEditText>(R.id.etDriverPlant)
         val etVacancy = mDialogView.findViewById<TextInputEditText>(R.id.etVacancy)
         val btnUpdateDriver = mDialogView.findViewById<Button>(R.id.btnUpdateDriver)
-
+//        Glide.with(this).load(imageUrl).into(image)
         etDriverName.setText(intent.getStringExtra("Driver Name"))
         etCarNumber.setText(intent.getStringExtra("Car Number"))
         etCapacity.setText(intent.getStringExtra("Capacity"))
@@ -141,7 +146,8 @@ class RecyclerDetailActivity : AppCompatActivity() {
         vacancy: String
     ){
         val dbRef = FirebaseDatabase.getInstance().getReference("Driver").child(id)
-        val driverInfo = Driver(id,name, carNumber, plant,capacity,carName,vacancy)
+        val imageUrl = intent.getStringExtra("Image")
+        val driverInfo = Driver(id,name, carNumber, plant,capacity,carName,vacancy,imageUrl)
         dbRef.setValue(driverInfo)
     }
 }

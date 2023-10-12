@@ -4,6 +4,8 @@ import android.app.AlertDialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.ImageButton
+import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -20,10 +22,11 @@ class CarSelectActivity : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var driverList: MutableList<Driver>
     private lateinit var adapter: SelectCarAdapter
+    private lateinit var reload: ImageButton
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_car_select)
-
+        reload = findViewById(R.id.btnRefresh)
         recyclerView = findViewById(R.id.recycleView)
 
 
@@ -42,6 +45,10 @@ class CarSelectActivity : AppCompatActivity() {
 
         databaseReference = FirebaseDatabase.getInstance().getReference("Driver")
         dialog.show()
+
+        reload.setOnClickListener {
+            recreate()
+        }
 
         eventListener = databaseReference.addValueEventListener(object: ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {

@@ -5,6 +5,7 @@ import android.content.pm.PackageManager
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Button
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.Toast
@@ -33,6 +34,7 @@ class booking_confirmed : AppCompatActivity() {
         builder.setCancelable(false)
         builder.setView(R.layout.progress_layout)
         val callButton = findViewById<ImageButton>(R.id.imageButton)
+        val endRide = findViewById<Button>(R.id.btnEndRide)
         val dialog = builder.create()
         val bookingId = intent.getStringExtra("BookingId")
         databaseReference = FirebaseDatabase.getInstance().getReference("Booking")
@@ -43,6 +45,23 @@ class booking_confirmed : AppCompatActivity() {
             Toast.makeText(this@booking_confirmed,"Error getting Booking Details", Toast.LENGTH_SHORT).show()
             dialog.dismiss()
 
+        }
+        // Button Click function for End Ride
+        endRide.setOnClickListener {
+            val selectedDriverId = intent.getStringExtra("DriverId")
+            val databaseReference1 = FirebaseDatabase.getInstance().getReference("Driver")
+            if (selectedDriverId != null) {
+                databaseReference1.child(selectedDriverId).child("availability").setValue("yes")
+                    .addOnSuccessListener {
+                        Toast.makeText(
+                            this,
+                            "Ride has been ended Succesfully",
+                            Toast.LENGTH_LONG
+                        ).show()
+                    }
+            }
+            val intent = Intent(this,HomeActivity::class.java)
+            startActivity(intent)
         }
         // Adding feature for call function on button click
         callButton.setOnClickListener{
@@ -94,25 +113,5 @@ class booking_confirmed : AppCompatActivity() {
         binding.textView4.text = driverName
         binding.textView7.text = carNumber
         dialog.dismiss()
-//        if (bookingId != null) {
-//            databaseReference.child(bookingId).addValueEventListener(object : ValueEventListener{
-//                override fun onDataChange(snapshot: DataSnapshot) {
-//                    val booking = snapshot.getValue(Booking::class.java)
-//                    if (booking != null) {
-//                        binding.textView4.text = booking.driverName
-//                        binding.textView7.text = booking.carNumber
-//                        dialog.dismiss()
-//                    }else{
-//                        Toast.makeText(this@booking_confirmed,"Error getting Booking Details", Toast.LENGTH_SHORT).show()
-//
-//                    }
-//                }
-//
-//                override fun onCancelled(error: DatabaseError) {
-//                    Toast.makeText(this@booking_confirmed,"Error getting Booking Details", Toast.LENGTH_SHORT).show()
-//                    dialog.dismiss()
-//                }
-//
-//            })
         }
     }
