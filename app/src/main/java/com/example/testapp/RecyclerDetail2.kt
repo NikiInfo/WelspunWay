@@ -18,8 +18,11 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.google.android.material.textfield.TextInputEditText
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import java.text.SimpleDateFormat
@@ -35,6 +38,7 @@ class RecyclerDetail2 : AppCompatActivity() {
     private lateinit var btnConfirmBooking: Button
     private lateinit var databaseReference: DatabaseReference
     private val REQUEST_SMS_PERMISSION = 123
+    private var vacancy: String = ""
 
 
 
@@ -67,7 +71,21 @@ class RecyclerDetail2 : AppCompatActivity() {
         }
         btnConfirmBooking.setOnClickListener {
             val selectedDriverId = intent.getStringExtra("Driver Id")
-            val vacancy = intent.getStringExtra("Availability")
+            //val vacancy = intent.getStringExtra("Availability")
+           val databaseReference3 = FirebaseDatabase.getInstance().getReference("Driver")
+            if (selectedDriverId != null) {
+                databaseReference3.child(selectedDriverId).addListenerForSingleValueEvent(object : ValueEventListener{
+                    override fun onDataChange(snapshot: DataSnapshot) {
+                        vacancy = snapshot.child("availability").getValue(String::class.java).toString()
+                    }
+
+                    override fun onCancelled(error: DatabaseError) {
+                        Toast.makeText(this@RecyclerDetail2, "Please update Your Details Under Profile", Toast.LENGTH_SHORT).show()
+
+                    }
+
+                })
+            }
             if (vacancy == "yes") {
                 saveBookingData()
                 val databaseReference2 = FirebaseDatabase.getInstance().getReference("Driver")
@@ -81,6 +99,10 @@ class RecyclerDetail2 : AppCompatActivity() {
                             ).show()
 
                         }
+                }
+                if (checkSmsPermission()) {
+                    // Permission is granted, send the SMS
+                    sendSms()
                 }
                 val intent = Intent(this, booking_confirmed::class.java).apply {
                     putExtra("Driver Name",driverName)
@@ -96,10 +118,10 @@ class RecyclerDetail2 : AppCompatActivity() {
                     Toast.LENGTH_LONG
                 ).show()
             }
-                        if (checkSmsPermission()) {
-                // Permission is granted, send the SMS
-                sendSms()
-            }
+//                        if (checkSmsPermission()) {
+//                // Permission is granted, send the SMS
+//                sendSms()
+//            }
 
         }
 
