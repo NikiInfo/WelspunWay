@@ -71,6 +71,8 @@ class booking_confirmed : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
+        Toast.makeText(this@booking_confirmed, "Going back is not allowed as your Ride has already Started", Toast.LENGTH_SHORT).show()
+
         //super.onBackPressed()
     }
 

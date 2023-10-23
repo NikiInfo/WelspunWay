@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -59,6 +60,9 @@ class MainActivity : AppCompatActivity() {
 //
 //
 //        }3000) //
+    }
+    override fun onBackPressed() {
+        //super.onBackPressed()
     }
 
 
