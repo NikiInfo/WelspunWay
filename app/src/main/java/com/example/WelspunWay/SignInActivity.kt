@@ -1,4 +1,4 @@
-package com.example.testapp
+package com.example.WelspunWay
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -7,8 +7,7 @@ import android.util.Log
 import android.util.Patterns
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
-import com.example.testapp.databinding.ActivitySignInBinding
-import com.example.testapp.databinding.ActivitySignUpBinding
+import com.example.WelspunWay.databinding.ActivitySignInBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase

@@ -20,6 +20,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Test App"
+rootProject.name = "WelspunWay"
 include(":app")
  

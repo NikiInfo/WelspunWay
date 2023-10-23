@@ -1,14 +1,11 @@
-package com.example.testapp
+package com.example.WelspunWay
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
-import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
-import com.example.testapp.databinding.ActivityHomeBinding
-import com.example.testapp.databinding.ActivityUserDetailsBinding
+import com.example.WelspunWay.databinding.ActivityUserDetailsBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError

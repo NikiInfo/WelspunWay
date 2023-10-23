@@ -1,25 +1,12 @@
-package com.example.testapp
+package com.example.WelspunWay
 
-import android.content.Context
-import android.content.DialogInterface
 import android.content.Intent
-import android.content.pm.PackageManager
-import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.telephony.SmsManager
-import android.view.Window
-import android.view.textclassifier.TextClassifierEvent.TextSelectionEvent.Builder
 import android.widget.ArrayAdapter
 import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContentProviderCompat.requireContext
-import androidx.core.content.ContextCompat
-import androidx.lifecycle.ViewModelProvider
-import com.example.testapp.databinding.ActivityHomeBinding
-import com.example.testapp.databinding.ActivitySignInBinding
+import com.example.WelspunWay.databinding.ActivityHomeBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DataSnapshot

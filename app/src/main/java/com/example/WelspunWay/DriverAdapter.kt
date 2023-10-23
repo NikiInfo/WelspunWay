@@ -1,8 +1,7 @@
-package com.example.testapp
+package com.example.WelspunWay
 
 import android.content.Context
 import android.content.Intent
-import android.text.Layout
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,17 +9,13 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.testapp.Driver
-import androidx.recyclerview.widget.RecyclerView.Recycler
 import com.bumptech.glide.Glide
-import com.bumptech.glide.GlideContext
 import com.bumptech.glide.annotation.GlideModule
 import com.bumptech.glide.module.AppGlideModule
 
-
-import kotlinx.coroutines.withContext
 @GlideModule
-class SelectCarAdapter(private val context: Context, private var driverlist: ArrayList<Driver>) : RecyclerView.Adapter<SelectCarAdapter.ViewHolder>() {
+class AppGlideModule : AppGlideModule()
+class DriverAdapter(private val context: Context, private var driverlist: ArrayList<Driver>) : RecyclerView.Adapter<DriverAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.recycler_item,parent,false)
@@ -35,7 +30,7 @@ class SelectCarAdapter(private val context: Context, private var driverlist: Arr
         holder.recDesc.text = dataItem.carName
         holder.recPlant.text = dataItem.plant
         holder.recCard.setOnClickListener{
-            val intent = Intent(context, RecyclerDetail2::class.java).apply {
+            val intent = Intent(context, RecyclerDetailActivity::class.java).apply {
                 putExtra("Driver Id",driverlist[position].driverId)
                 putExtra("Image",driverlist[position].imageUrl)
                 putExtra("Plant",driverlist[position].plant)
@@ -44,6 +39,7 @@ class SelectCarAdapter(private val context: Context, private var driverlist: Arr
                 putExtra("Driver Name",driverlist[position].name)
                 putExtra("Car Number",driverlist[position].carNumber)
                 putExtra("Availability",driverlist[position].availability)
+                putExtra("Phone Number",driverlist[position].phnNumber)
 
             }
             context.startActivity(intent)
@@ -62,24 +58,13 @@ class SelectCarAdapter(private val context: Context, private var driverlist: Arr
         notifyDataSetChanged()
     }
 
+
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val recImage: ImageView = itemView.findViewById(R.id.recImage)
         val recCard: CardView = itemView.findViewById(R.id.recCard)
         val recDesc: TextView = itemView.findViewById(R.id.recDesc)
         val recPlant: TextView = itemView.findViewById(R.id.recPlant)
         val recTitle: TextView = itemView.findViewById(R.id.recTitle)
-
-    }
-    fun filterDataList(plantName: String, availability: String) {
-        val filteredList = ArrayList<Driver>()
-
-        for (driver in driverlist) {
-            if (driver.plant == plantName && driver.availability == availability) {
-                filteredList.add(driver)
-            }
-        }
-
-        searchDataList(filteredList)
 
     }
 

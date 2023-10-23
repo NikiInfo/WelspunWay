@@ -1,4 +1,4 @@
-package com.example.testapp
+package com.example.WelspunWay
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

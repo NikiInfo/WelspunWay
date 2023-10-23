@@ -1,8 +1,5 @@
-package com.example.testapp
+package com.example.WelspunWay
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 class DataHolder private constructor() {
 
     var toDestination: String? = null

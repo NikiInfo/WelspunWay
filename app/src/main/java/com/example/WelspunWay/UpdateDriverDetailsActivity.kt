@@ -1,30 +1,6 @@
-package com.example.testapp
+package com.example.WelspunWay
 
-import android.app.Activity
-import android.app.AlertDialog
-import android.content.Intent
-import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.TextView
-import android.widget.Toast
-import androidx.activity.result.ActivityResult
-import androidx.activity.result.contract.ActivityResultContracts
-import com.bumptech.glide.Glide
-import com.example.testapp.databinding.ActivityUpdateDriverDetailsBinding
-import com.example.testapp.databinding.ActivityUploadDriverBinding
-import com.google.android.gms.tasks.Task
-import com.google.android.material.textfield.TextInputEditText
-import com.google.android.material.textfield.TextInputLayout
-import com.google.android.play.core.integrity.e
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.storage.FirebaseStorage
-import com.google.firebase.storage.StorageReference
-import com.google.firebase.storage.UploadTask
-import org.w3c.dom.Text
 
 class UpdateDriverDetailsActivity : AppCompatActivity() {
 //    private lateinit var updateImage: ImageView

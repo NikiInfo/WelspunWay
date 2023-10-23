@@ -1,27 +1,20 @@
-package com.example.testapp
+package com.example.WelspunWay
 
 import android.app.Activity
 import android.app.AlertDialog
 import android.app.Dialog
-import android.app.Instrumentation
-import android.app.Instrumentation.ActivityResult
 import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
-import androidx.activity.result.contract.ActivityResultContract
 import androidx.activity.result.contract.ActivityResultContracts
-import com.bumptech.glide.Glide
-import com.example.testapp.databinding.ActivityAddUserDetailsBinding
-import com.example.testapp.databinding.ActivityUploadDriverBinding
-import com.google.android.material.textfield.TextInputLayout
+import com.example.WelspunWay.databinding.ActivityUploadDriverBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
-import kotlin.system.exitProcess
 
 class UploadDriverActivity : AppCompatActivity() {
     private lateinit var binding : ActivityUploadDriverBinding

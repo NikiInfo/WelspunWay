@@ -1,8 +1,7 @@
-package com.example.testapp
+package com.example.WelspunWay
 
 import android.app.AlertDialog
 import android.content.Intent
-import android.media.Image
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button

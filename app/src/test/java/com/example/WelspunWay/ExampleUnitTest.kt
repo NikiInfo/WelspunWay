@@ -1,4 +1,4 @@
-package com.example.testapp
+package com.example.WelspunWay
 
 import org.junit.Test
 

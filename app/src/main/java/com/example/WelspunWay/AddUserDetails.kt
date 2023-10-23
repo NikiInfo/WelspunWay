@@ -1,15 +1,12 @@
-package com.example.testapp
+package com.example.WelspunWay
 
 import android.app.Dialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
 import android.view.Window
 import android.widget.Toast
-import android.widget.Button
-import com.example.testapp.databinding.ActivityAddUserDetailsBinding
-import com.google.android.gms.common.internal.Objects.ToStringHelper
+import com.example.WelspunWay.databinding.ActivityAddUserDetailsBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
