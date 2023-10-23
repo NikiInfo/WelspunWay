@@ -102,11 +102,12 @@ class UploadDriverActivity : AppCompatActivity() {
         val carName = binding.etCarName.editText?.text.toString()
         val plant = binding.etDriverPlant.editText?.text.toString()
         val vacancy = binding.etVacancy.editText?.text.toString()
+        val phnNumber = binding.tvphnNumber.editText?.text.toString()
 
         val driverId = databaseReference.push().key!!
 
 
-        val driver = Driver(driverId,driverName,carNumber,plant,capacity,carName,vacancy,urlImage)
+        val driver = Driver(driverId,driverName,carNumber,plant,capacity,carName,vacancy,urlImage,phnNumber)
         if(checkAllField()) {
             databaseReference.child(driverId).setValue(driver)
                 .addOnCompleteListener {

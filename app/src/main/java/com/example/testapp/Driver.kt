@@ -11,6 +11,7 @@ data class Driver(var driverId: String,
                   var carName : String? = "",
                   var availability : String? = "",
                   var imageUrl : String ? = "",
+                  var phnNumber : String ? = ""
   ){constructor() : this("","")}
 
 //data class DataClass(

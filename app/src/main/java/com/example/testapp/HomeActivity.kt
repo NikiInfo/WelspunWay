@@ -112,19 +112,15 @@ class HomeActivity : AppCompatActivity() {
                 dataHolder.empName = empName
 
 
-                if (uid != null) {
-                    if(empName==null && plant==null){
-                        Toast.makeText(this@HomeActivity, "Please update Your Details Under Profile", Toast.LENGTH_SHORT).show()
+                if(empName==null && plant==null){
+                    Toast.makeText(this@HomeActivity, "Please update Your Details Under Profile", Toast.LENGTH_SHORT).show()
 
-                    } else {
-                        val intent = Intent(this@HomeActivity,CarSelectActivity::class.java).apply {
-                        putExtra("plant",plant)
-
-                        }
-                        startActivity(intent)
-                    }
                 } else {
-                    Toast.makeText(this@HomeActivity, "User data not found", Toast.LENGTH_SHORT).show()
+                    val intent = Intent(this@HomeActivity,CarSelectActivity::class.java).apply {
+                    putExtra("plant",plant)
+
+                    }
+                    startActivity(intent)
                 }
             }
 

@@ -65,7 +65,7 @@ class booking_confirmed : AppCompatActivity() {
         }
         // Adding feature for call function on button click
         callButton.setOnClickListener{
-            val phoneNumber = "+919979796053"
+            val phoneNumber = intent.getStringExtra("Phone Number")
 
             val intent = Intent(Intent.ACTION_CALL, Uri.parse("tel:$phoneNumber"))
 
@@ -89,7 +89,7 @@ class booking_confirmed : AppCompatActivity() {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if(requestCode == REQUEST_CALL_PERMISSION) {
             if(grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                val phoneNumber = "+919979796053"
+                val phoneNumber = intent.getStringExtra("Phone Number")
 
                 val intent = Intent(Intent.ACTION_CALL, Uri.parse("tel:$phoneNumber"))
 

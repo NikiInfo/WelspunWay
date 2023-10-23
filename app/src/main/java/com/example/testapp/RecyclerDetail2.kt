@@ -38,7 +38,8 @@ class RecyclerDetail2 : AppCompatActivity() {
     private lateinit var btnConfirmBooking: Button
     private lateinit var databaseReference: DatabaseReference
     private val REQUEST_SMS_PERMISSION = 123
-    private var vacancy: String = ""
+//    private var vacancy: String = ""
+    //private var phnNumber: String = ""
 
 
 
@@ -76,7 +77,40 @@ class RecyclerDetail2 : AppCompatActivity() {
             if (selectedDriverId != null) {
                 databaseReference3.child(selectedDriverId).addListenerForSingleValueEvent(object : ValueEventListener{
                     override fun onDataChange(snapshot: DataSnapshot) {
-                        vacancy = snapshot.child("availability").getValue(String::class.java).toString()
+                        val vacancy = snapshot.child("availability").getValue(String::class.java)
+                       val phnNumber = snapshot.child("phnNumber").getValue(String::class.java)
+                        if (vacancy != "no")     {
+                            val databaseReference2 = FirebaseDatabase.getInstance().getReference("Driver")
+                            databaseReference2.child(selectedDriverId).child("availability").setValue("no")
+                                .addOnSuccessListener {
+                                    Toast.makeText(
+                                        this@RecyclerDetail2,
+                                        "Booking has been confirmed succesfully",
+                                        Toast.LENGTH_LONG
+                                    ).show()
+
+                                }
+                            saveBookingData()
+
+                            if (checkSmsPermission()) {
+                                // Permission is granted, send the SMS
+                                sendSms()
+                            }
+                            val intent = Intent(this@RecyclerDetail2, booking_confirmed::class.java).apply {
+                                putExtra("Driver Name",driverName)
+                                putExtra("Phone Number",phnNumber)
+                                putExtra("Car Number",carNumber)
+                                putExtra("BookingId",bookingId)
+                                putExtra("DriverId",selectedDriverId)
+                            }
+                            startActivity(intent)
+                        } else  {
+                            Toast.makeText(
+                                this@RecyclerDetail2,
+                                "Sorry! This has been booked by someone else",
+                                Toast.LENGTH_LONG
+                            ).show()
+                        }
                     }
 
                     override fun onCancelled(error: DatabaseError) {
@@ -86,42 +120,7 @@ class RecyclerDetail2 : AppCompatActivity() {
 
                 })
             }
-            if (vacancy == "yes") {
-                saveBookingData()
-                val databaseReference2 = FirebaseDatabase.getInstance().getReference("Driver")
-                if (selectedDriverId != null) {
-                    databaseReference2.child(selectedDriverId).child("availability").setValue("no")
-                        .addOnSuccessListener {
-                            Toast.makeText(
-                                this,
-                                "Booking has been confirmed succesfully",
-                                Toast.LENGTH_LONG
-                            ).show()
 
-                        }
-                }
-                if (checkSmsPermission()) {
-                    // Permission is granted, send the SMS
-                    sendSms()
-                }
-                val intent = Intent(this, booking_confirmed::class.java).apply {
-                    putExtra("Driver Name",driverName)
-                    putExtra("Car Number",carNumber)
-                    putExtra("BookingId",bookingId)
-                    putExtra("DriverId",selectedDriverId)
-                }
-                startActivity(intent)
-            } else  {
-                Toast.makeText(
-                    this,
-                    "Sorry! This has been booked by someone else",
-                    Toast.LENGTH_LONG
-                ).show()
-            }
-//                        if (checkSmsPermission()) {
-//                // Permission is granted, send the SMS
-//                sendSms()
-//            }
 
         }
 
@@ -197,21 +196,36 @@ class RecyclerDetail2 : AppCompatActivity() {
         return true
     }
     private fun sendSms() {
+        val selectedDriverId = intent.getStringExtra("Driver Id")
         val dataHolder = DataHolder.getInstance()
         val empName = dataHolder.empName
         val to = dataHolder.toDestination
         val from = dataHolder.fromDestination
-        val phoneNumber = "+918688451734" // Replace with the recipient's phone number
-        val message = "Your Ride has Started with $empName Location from $from to $to" // Replace with your message
+        val databaseReference3 = FirebaseDatabase.getInstance().getReference("Driver")
+        if (selectedDriverId != null) {
+            databaseReference3.child(selectedDriverId).addListenerForSingleValueEvent(object:ValueEventListener{
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    val phnNumber = snapshot.child("phnNumber").getValue(String::class.java).toString()
+                    val phoneNumber = " " // Replace with the recipient's phone number
+                    val message = "Your Ride has Started with $empName Location from $from to $to" // Replace with your message
 
-        try {
-            val smsManager = SmsManager.getDefault()
-            smsManager.sendTextMessage(phoneNumber, null, message, null, null)
-            Toast.makeText(this, "SMS sent!", Toast.LENGTH_SHORT).show()
-        } catch (e: Exception) {
-            Toast.makeText(this, "SMS failed to send.", Toast.LENGTH_SHORT).show()
-            e.printStackTrace()
+                    try {
+                        val smsManager = SmsManager.getDefault()
+                        smsManager.sendTextMessage(phnNumber, null, message, null, null)
+                        Toast.makeText(this@RecyclerDetail2, "SMS sent!", Toast.LENGTH_SHORT).show()
+                    } catch (e: Exception) {
+                        Toast.makeText(this@RecyclerDetail2, "SMS failed to send.", Toast.LENGTH_SHORT).show()
+                        e.printStackTrace()
+                    }
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    Toast.makeText(this@RecyclerDetail2, "Driver Phn Number Does Not Exist",Toast.LENGTH_SHORT).show()
+                }
+
+            })
         }
+
     }
     private fun showPermissionExplanation() {
         androidx.appcompat.app.AlertDialog.Builder(this)
