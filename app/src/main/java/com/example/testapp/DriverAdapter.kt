@@ -44,6 +44,7 @@ class DriverAdapter(private val context: Context, private var driverlist: ArrayL
                 putExtra("Driver Name",driverlist[position].name)
                 putExtra("Car Number",driverlist[position].carNumber)
                 putExtra("Availability",driverlist[position].availability)
+                putExtra("Phone Number",driverlist[position].phnNumber)
 
             }
             context.startActivity(intent)

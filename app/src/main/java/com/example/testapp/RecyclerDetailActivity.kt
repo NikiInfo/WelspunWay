@@ -39,8 +39,6 @@ class RecyclerDetailActivity : AppCompatActivity() {
                 intent.getStringExtra("Driver Name").toString()
             )
         }
-//        initViews()
-//        setValuesToViews()
         btnDeleteDriver = findViewById(R.id.btnDeleteDriverDetails)
         btnUpdateDriverDetailsActivity = findViewById(R.id.btnUpdateDriverDetails)
        tvcarNumber = findViewById(R.id.detailCarNumber)
@@ -74,6 +72,7 @@ class RecyclerDetailActivity : AppCompatActivity() {
                     Toast.makeText(this,"Error", Toast.LENGTH_SHORT).show()
                 }
         }
+        // DONT DELETE, REQUIRED FOR FUTURE PURPOSE/////////////////////////////////////////
 //        btnUpdateDriverDetailsActivity.setOnClickListener{
 //            val intent = Intent(this,UpdateDriverDetailsActivity::class.java)
 //                .putExtra("Car Name", carName.text.toString())
@@ -85,6 +84,7 @@ class RecyclerDetailActivity : AppCompatActivity() {
 //        }
 
     //}
+        // DONT DELETE, REQUIRED FOR FUTURE PURPOSE/////////////////////////////////////////
 }
     private fun openUpdateDialog(
         driverId: String,
@@ -106,6 +106,7 @@ class RecyclerDetailActivity : AppCompatActivity() {
         val etPlant = mDialogView.findViewById<TextInputEditText>(R.id.etDriverPlant)
         val etVacancy = mDialogView.findViewById<TextInputEditText>(R.id.etVacancy)
         val btnUpdateDriver = mDialogView.findViewById<Button>(R.id.btnUpdateDriver)
+        val etphnNumber = mDialogView.findViewById<TextInputEditText>(R.id.etphnNumber)
 //        Glide.with(this).load(imageUrl).into(image)
         etDriverName.setText(intent.getStringExtra("Driver Name"))
         etCarNumber.setText(intent.getStringExtra("Car Number"))
@@ -113,8 +114,9 @@ class RecyclerDetailActivity : AppCompatActivity() {
         etCarName.setText(intent.getStringExtra("Car Name"))
         etPlant.setText(intent.getStringExtra("Plant"))
         etVacancy.setText(intent.getStringExtra("Availability"))
+        etphnNumber.setText(intent.getStringExtra("Phone Number"))
 
-        mDialog.setTitle("Udpating $driverName Reconrd")
+        mDialog.setTitle("Udpating $driverName Record")
 
         val alertDialog = mDialog.create()
         alertDialog.show()
@@ -127,14 +129,12 @@ class RecyclerDetailActivity : AppCompatActivity() {
                 etCapacity.text.toString().toInt(),
                 etCarName.text.toString(),
                 etPlant.text.toString(),
-                etVacancy.text.toString()
+                etVacancy.text.toString(),
+                etphnNumber.text.toString()
             )
             Toast.makeText(this,"Driver data Updated Successfully",Toast.LENGTH_SHORT).show()
             alertDialog.dismiss()
         }
-
-
-
     }
     private fun updateDriverData(
         id: String,
@@ -143,11 +143,12 @@ class RecyclerDetailActivity : AppCompatActivity() {
         capacity: Int,
         carName: String,
         plant: String,
-        vacancy: String
+        vacancy: String,
+        phn_Number: String
     ){
         val dbRef = FirebaseDatabase.getInstance().getReference("Driver").child(id)
         val imageUrl = intent.getStringExtra("Image")
-        val driverInfo = Driver(id,name, carNumber, plant,capacity,carName,vacancy,imageUrl)
+        val driverInfo = Driver(id,name, carNumber, plant,capacity,carName,vacancy,imageUrl,phn_Number)
         dbRef.setValue(driverInfo)
     }
 }

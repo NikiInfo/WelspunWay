@@ -205,7 +205,7 @@ class RecyclerDetail2 : AppCompatActivity() {
         if (selectedDriverId != null) {
             databaseReference3.child(selectedDriverId).addListenerForSingleValueEvent(object:ValueEventListener{
                 override fun onDataChange(snapshot: DataSnapshot) {
-                    val phnNumber = snapshot.child("phnNumber").getValue(String::class.java).toString()
+                    val phnNumber = "+91" + snapshot.child("phnNumber").getValue(String::class.java).toString()
                     val phoneNumber = " " // Replace with the recipient's phone number
                     val message = "Your Ride has Started with $empName Location from $from to $to" // Replace with your message
 

@@ -55,7 +55,8 @@ class UploadDriverActivity : AppCompatActivity() {
         }
 
         databaseReference = FirebaseDatabase.getInstance().getReference("Driver")
-        binding.btnSaveDriverDetails.setOnClickListener{ saveData() }
+        binding.btnSaveDriverDetails.setOnClickListener{ saveData()
+        }
 
     }
     private fun saveData() {
@@ -113,6 +114,8 @@ class UploadDriverActivity : AppCompatActivity() {
                 .addOnCompleteListener {
                     Toast.makeText(this, "Driver details saved successfully", Toast.LENGTH_SHORT)
                         .show()
+                    val intent = Intent(this,AdminActivity::class.java)
+                    startActivity(intent)
                 }
                 .addOnFailureListener {
                     Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show()
