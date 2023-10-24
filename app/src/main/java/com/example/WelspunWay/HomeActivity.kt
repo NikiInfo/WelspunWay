@@ -1,9 +1,11 @@
 package com.example.WelspunWay
 
+import android.app.AlertDialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ArrayAdapter
+import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
 import com.example.WelspunWay.databinding.ActivityHomeBinding
@@ -52,11 +54,22 @@ class HomeActivity : AppCompatActivity() {
         }
 
         binding.btnSignOut.setOnClickListener {
-            auth.signOut()
-
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
-            finish()
+//            val mDialog = AlertDialog.Builder(this)
+//            val inflater = layoutInflater
+//            val mDialogView = inflater.inflate(R.layout.activity_confirm_logout,null)
+//            mDialog.setView(mDialogView)
+//            val alertDialog = mDialog.create()
+//            alertDialog.show()
+//            val btnLogout = findViewById<Button>(R.id.btnLogout)
+//            btnLogout.setOnClickListener {
+//                auth.signOut()
+//            }
+            signout()
+//            auth.signOut()
+//
+//            val intent = Intent(this, MainActivity::class.java)
+//            startActivity(intent)
+//            finish()
 
         }
 
@@ -70,6 +83,23 @@ class HomeActivity : AppCompatActivity() {
 
 
 
+
+    }
+    private fun signout(){
+                    val mDialog = AlertDialog.Builder(this)
+            val inflater = layoutInflater
+            val mDialogView = inflater.inflate(R.layout.activity_confirm_logout,null)
+            mDialog.setView(mDialogView)
+            val alertDialog = mDialog.create()
+            alertDialog.show()
+            val btnLogout = mDialogView.findViewById<Button>(R.id.btnLogout)
+            btnLogout.setOnClickListener {
+                auth.signOut()
+                alertDialog.dismiss()
+                            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+            finish()
+            }
 
     }
 

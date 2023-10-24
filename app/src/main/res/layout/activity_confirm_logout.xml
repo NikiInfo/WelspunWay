@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/confirmLogout"
+        android:layout_width="match_parent"
+        android:layout_height="225dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        app:cardCornerRadius="30dp"
+        app:cardElevation="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.395">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="20dp"
+            android:text="Confirm Logout"
+            android:textSize="35sp"
+            android:id="@+id/tvConfirmLogout"
+            android:fontFamily="@font/gothic"/>
+
+        <Button
+            android:id="@+id/btnLogout"
+            android:layout_width="124dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="200dp"
+            android:layout_marginTop="150dp"
+            android:backgroundTint="@color/Welspun"
+            android:text="Logout"
+            app:cornerRadius="30dp" />
+    </androidx.cardview.widget.CardView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
